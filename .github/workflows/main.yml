@@ -34,8 +34,8 @@ jobs:
       - name: Build Jar 
         run: | 
           ./gradlew build 
-          mkdir -p ${{ github.workspace }}/build 
-          mv build/libs/*.jar ${{ github.workspace }}/build/ 
+          mkdir -p ${{ github.workspace }}/plugin 
+          mv plugin/build/libs/*.jar ${{ github.workspace }}/plugin/ 
       - name: Set version as environment variable 
         run: | 
           RELEASE_VERSION=$(./gradlew properties -q | grep "version:" | awk '{print $2}') 
@@ -50,6 +50,6 @@ jobs:
           prerelease: false  
           title: "Release ${{ env.RELEASE_VERSION }}"  
           files: |  
-            ${{ github.workspace }}/build/*.jar 
+            ${{ github.workspace }}/plugin/*.jar 
       - name: DONE!!! 
         run: echo "done"
